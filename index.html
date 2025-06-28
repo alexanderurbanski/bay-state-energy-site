@@ -189,48 +189,108 @@
         </li>
         <li class="p-6 border rounded-lg hover:shadow-lg transition-shadow" data-aos="fade-up" data-aos-delay="400">
           <h3 class="font-semibold text-xl mb-2">Cost Efficient</h3>
-          <p class="text-gray-600">Competitive capital and operating costs compared to sCO₂ Brayton.</p>
+          <p class="text-gray-600">Competitive capital and operating costs compared to sCO₂ Brayton cycle.</p>
         </li>
       </ul>
     </div>
   </section>
-
   <!-- Market & Feasibility -->
   <section id="market" class="py-20 px-6 bg-gray-50">
     <div class="max-w-4xl mx-auto" data-aos="fade-left">
-      <h2 class="text-4xl font-semibold text-dark mb-6">Market & Feasibility</h2>
+      <h2 class="text-4xl font-semibold text-dark mb-6">Exponential Microreactor Growth</h2>
       <p class="text-lg text-gray-600 mb-6">The microreactor market is projected to exceed $240 billion by 2050, driven by remote power needs, critical infrastructure resilience, and decarbonization goals.</p>
-      <img src="assets/market-chart.png" alt="Market projection chart" class="section-img w-full mb-6 rounded-lg shadow-lg" loading="lazy">
-      <p class="text-lg text-gray-600">Bay State Energy will establish feasibility through DOE partnerships, testbed experiments, and in-depth technoeconomic analysis.</p>
+      <!-- ①  Chart container (put where you want the graph to show up) -->
+        <div id="capacity-chart-wrapper" class="max-w-4xl mx-auto my-12">
+            <canvas id="capacityChart" height="320"></canvas>
+        
+        </div>
+        <!-- ===== DATA SOURCE (place right after </canvas>) ===== -->
+        <div class="mt-4 text-center">
+            <p class="text-sm italic text-gray-500">
+            Source:
+            <a
+                href="https://gain.inl.gov/content/uploads/4/2024/04/Document-INL-EXT-21-63214.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="underline hover:text-blue-600"
+            >
+                INL “Microreactor Market Assessment (INL-EXT-21-63214, Apr 2024)”
+            </a>
+            </p>
+        </div>
+        <!-- ===== END DATA SOURCE ===== -->
+         <p><a> </a></p> 
+      <p class="text-lg text-gray-600">Bay State Energy will establish feasibility of our elite power cycle through DOE partnerships, testbed experiments, and in-depth technoeconomic analysis.</p>
     </div>
   </section>
 
-  <!-- Team & Partners -->
   <section id="team" class="py-20 px-6 bg-white">
     <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
       <h2 class="text-4xl font-semibold text-dark mb-6">Team & Partners</h2>
+  
+      <!-- Partner Logos -->
       <div class="flex flex-wrap justify-center items-center space-x-8 mb-12">
         <img src="assets/bu-me-logo.png" alt="BU Mechanical Engineering" class="logo" loading="lazy">
         <img src="assets/argonne-logo.png" alt="Argonne National Laboratory" class="logo" loading="lazy">
         <img src="assets/doe-logo.png" alt="U.S. Department of Energy" class="logo" loading="lazy">
         <img src="assets/dod-logo.png" alt="U.S. Department of Defense" class="logo" loading="lazy">
       </div>
+  
+      <!-- Team Member Cards -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        
+        <!-- Alexander Urbanski -->
         <div class="p-6 border rounded-lg hover:shadow-lg transition-shadow" data-aos="fade-up" data-aos-delay="100">
           <h3 class="font-semibold text-xl mb-2">Alexander Urbanski</h3>
-          <p class="text-gray-600">CTO & Co-Founder. BA in Physics & CS, Boston University. Lead inventor of the NTG.</p>
+          <p class="text-gray-600">
+            CTO &amp; Co-Founder. BA in Physics &amp; CS, Boston University. Former Argonne National Laboratory &amp; MIT startup.
+          </p>
+          <a
+            href="https://www.linkedin.com/in/aurban42/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-block mt-4"
+          >
+            <img src="assets/linkedin-icon.svg" alt="LinkedIn" class="w-6 h-6" />
+          </a>
         </div>
+  
+        <!-- Nahiyan Muhammad -->
         <div class="p-6 border rounded-lg hover:shadow-lg transition-shadow" data-aos="fade-up" data-aos-delay="200">
           <h3 class="font-semibold text-xl mb-2">Nahiyan Muhammad</h3>
-          <p class="text-gray-600">Energy Systems Engineer, BS in Mechanical and Computer Engineering, Boston University. Thermodynamics and CAD Design.</p>
+          <p class="text-gray-600">
+            Energy Systems Engineer, BS in Mechanical and Computer Engineering, Boston University. Former Harmony Desalinating engineer and Boston University researcher.
+          </p>
+          <a
+            href="https://www.linkedin.com/in/nahiyan-muhammad/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-block mt-4"
+          >
+            <img src="assets/linkedin-icon.svg" alt="LinkedIn" class="w-6 h-6" />
+          </a>
         </div>
+  
+        <!-- Bakdaulet Turganbek -->
         <div class="p-6 border rounded-lg hover:shadow-lg transition-shadow" data-aos="fade-up" data-aos-delay="300">
           <h3 class="font-semibold text-xl mb-2">Bakdaulet Turganbek</h3>
-          <p class="text-gray-600">CEO & Co-Founder, BA in Economics, Boston University. Grant Proposals, Business Economics.</p>
+          <p class="text-gray-600">
+            CEO &amp; Co-Founder, BA in Economics, Boston University. Former Chief Investment Officer at Tayaab.
+          </p>
+          <a
+            href="https://www.linkedin.com/in/bakdaulet-t-08506632a/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-block mt-4"
+          >
+            <img src="assets/linkedin-icon.svg" alt="LinkedIn" class="w-6 h-6" />
+          </a>
         </div>
+  
       </div>
     </div>
   </section>
+  
 
   <!-- Press Releases -->
   <section id="press" class="py-20 px-6 bg-gray-50">
@@ -253,7 +313,7 @@
           <h3 class="font-semibold text-xl mb-2">Boston University Best Senior Project at Dean's Imagineering Competition</h3>
           <p class="text-gray-600 mb-2">May 20, 2024</p>
           <p class="text-gray-600">Bay State Energy’s senior project won top honors at BU’s Dean's Imagineering Competition for its NTG innovation.</p>
-          <a href="#" class="text-secondary hover:underline mt-2 inline-block">Read More</a>
+          <a href="https://www.bu.edu/eng/2025/05/22/accessible-motion-capture-technology-wins-2025-deans-imagineering-competition/#:~:text=The%20winner%20of%20this%20year's,Kidess%20(ENG'25)." class="text-secondary hover:underline mt-2 inline-block">Read More</a>
         </div>
       </div>
     </div>
@@ -292,5 +352,81 @@
 
   <!-- Alpine.js for mobile menu -->
   <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <!-- ②  Chart.js CDN + configuration (place right above </body>) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+  // Data
+  const capacityData = {
+    labels: ['2030', '2040', '2050'],
+    datasets: [
+      {
+        label: 'Microreactors (IAEA Low Case)',
+        data: [0, 5, 25],
+        backgroundColor: '#2563EB',      // Tailwind primary
+        stack: 'total',
+      },
+      {
+        label: 'Microreactors (IAEA High Case)',
+        data: [1, 12, 10],
+        backgroundColor: '#94A3B8',      // Tailwind accent
+        stack: 'total',
+      },
+      {
+        label: 'Microreactors (IPCC Modified)',
+        data: [4, 4, 80],
+        backgroundColor: '#0F172A',      // Tailwind secondary
+        stack: 'total',
+      },
+    ],
+  };
+
+  // Chart configuration
+  const capacityConfig = {
+    type: 'bar',
+    data: capacityData,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        title: {
+          display: true,
+          text: 'Microreactor Top-Down Global Projection (Capacity)',
+          font: { family: 'Lexend', size: 18 },
+          color: '#0F172A',              // Tailwind dark
+          padding: { bottom: 10 },
+        },
+        legend: {
+          position: 'bottom',
+          labels: { font: { family: 'Lexend' }, color: '#0F172A' },
+        },
+        tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y} GWe` } },
+      },
+      scales: {
+        x: {
+          stacked: true,
+          grid: { display: false },
+          ticks: { color: '#0F172A', font: { family: 'Lexend' } },
+        },
+        y: {
+          stacked: true,
+          suggestedMin: 0,
+          suggestedMax: 140,
+          title: {
+            display: true,
+            text: 'GWe',
+            font: { family: 'Lexend' },
+            color: '#0F172A',
+          },
+          ticks: { color: '#0F172A', font: { family: 'Lexend' } },
+        },
+      },
+    },
+  };
+
+  // Render the chart
+  const ctx = document.getElementById('capacityChart');
+  new Chart(ctx, capacityConfig);
+</script>
+
 </body>
 </html>
