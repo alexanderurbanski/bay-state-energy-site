@@ -4,8 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bay State Energy</title>
+  <!-- Meta Tags for SEO -->
+  <meta name="description" content="Bay State Energy serves the microreactor market with innovative, platform-agnostic power cycle solutions.">
+  <meta name="keywords" content="Bay State Energy, microreactor, nuclear thermoelectric generator, clean energy">
   <!-- Google Font: Lexend -->
-  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&display=swap" rel="stylesheet">
   <!-- Tailwind CSS CDN + custom config -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -19,122 +22,275 @@
             primary: '#1E40AF',
             secondary: '#047857',
             dark: '#111827',
+            accent: '#7C3AED',
+          },
+          boxShadow: {
+            'custom': '0 1px 3px rgba(0, 0, 0, 0.1)',
           },
         }
       }
     }
   </script>
-  <link rel="stylesheet" href="global.css">
-  <!-- Unified logo sizing: match DOE logo height -->
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!-- Global CSS -->
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
     .logo {
-      height: 48px !important;
+      height: 64px !important;
       width: auto !important;
+      transition: transform 0.3s ease;
+    }
+    .logo:hover {
+      transform: scale(1.05);
+    }
+    .btn-primary {
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      transition: transform 0.5s ease-in-out;
+    }
+    nav.hidden {
+      transform: translateY(-100%);
+    }
+    .hero-bg {
+      background: linear-gradient(to left, #011858, #001228);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 20px 0;
+      color: white;
+    }
+    .section-img {
+      transition: transform 0.3s ease;
+    }
+    .section-img:hover {
+      transform: scale(1.02);
+    }
+    [id] {
+      scroll-margin-top: 80px;
+    }
+    .mobile-menu {
+      transform: translateY(-100%);
+      transition: transform 0.3s ease-in-out;
+    }
+    .mobile-menu[x-show="isOpen"] {
+      transform: translateY(0);
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 100;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .back-to-top.visible {
+      opacity: 1;
     }
   </style>
 </head>
-<body class="font-sans bg-white text-dark">
+<body class="font-sans bg-white text-dark" x-data="{ isOpen: false, lastScroll: 0, scrollTimeout: null }" x-init="
+    AOS.init({ duration: 1000, once: true });
+    window.addEventListener('scroll', () => {
+      clearTimeout($data.scrollTimeout);
+      $data.scrollTimeout = setTimeout(() => {
+        const currentScroll = window.scrollY;
+        const scrollThreshold = 5;
+        if (currentScroll > $data.lastScroll && currentScroll > scrollThreshold) {
+          $refs.nav.classList.add('hidden');
+        } else {
+          $refs.nav.classList.remove('hidden');
+        }
+        $data.lastScroll = currentScroll;
+        document.querySelector('.back-to-top').classList.toggle('visible', currentScroll > 300);
+      }, 50);
+    });
+  ">
   <!-- Navigation -->
-  <nav class="w-full flex items-center justify-between p-6">
-    <div>
+  <nav x-ref="nav" class="w-full flex items-center justify-between p-3 shadow-custom">
+    <div class="flex-shrink-0">
       <a href="/">
         <img src="assets/logo-black-test-allcaps.png" alt="Bay State Energy logo" class="logo">
       </a>
     </div>
-    <ul class="flex space-x-8 text-dark">
-      <li><a href="#technology" class="hover:underline">Technology</a></li>
-      <li><a href="#market" class="hover:underline">Market</a></li>
-      <li><a href="#team" class="hover:underline">Team</a></li>
-      <li><a href="#contact" class="hover:underline">Contact</a></li>
-    </ul>
+    <div class="flex-1 flex justify-center space-x-6">
+      <ul class="hidden md:flex space-x-6 text-gray-700">
+        <li><a href="#technology" class="hover:text-primary transition-colors">Technology</a></li>
+        <li><a href="#market" class="hover:text-primary transition-colors">Market</a></li>
+        <li><a href="#team" class="hover:text-primary transition-colors">Team</a></li>
+        <li><a href="#press" class="hover:text-primary transition-colors">Press</a></li>
+        <li><a href="#contact" class="hover:text-primary transition-colors">Contact</a></li>
+      </ul>
+    </div>
+    <div class="flex-shrink-0">
+      <a href="#signup" class="px-4 py-2 bg-black text-white rounded-full hover:bg-gray-800 transition-colors">Sign Up</a>
+      <button @click="isOpen = !isOpen" class="md:hidden ml-4 text-dark focus:outline-none" aria-label="Toggle mobile menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path :stroke="isOpen ? 'none' : 'currentColor'" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          <path :stroke="isOpen ? 'currentColor' : 'none'" stroke-width="2" d="M6 6l12 12M6 18l12 -12" />
+        </svg>
+      </button>
+    </div>
+    <div x-show="isOpen" class="mobile-menu md:hidden absolute top-14 left-0 w-full bg-white shadow-lg" @click.away="isOpen = false">
+      <ul class="flex flex-col space-y-4 p-4 text-dark">
+        <li><a href="#technology" class="hover:text-primary transition-colors text-lg" @click="isOpen = false">Technology</a></li>
+        <li><a href="#market" class="hover:text-primary transition-colors text-lg" @click="isOpen = false">Market</a></li>
+        <li><a href="#team" class="hover:text-primary transition-colors text-lg" @click="isOpen = false">Team</a></li>
+        <li><a href="#press" class="hover:text-primary transition-colors text-lg" @click="isOpen = false">Press</a></li>
+        <li><a href="#contact" class="hover:text-primary transition-colors text-lg" @click="isOpen = false">Contact</a></li>
+        <li><a href="#signup" class="hover:text-primary transition-colors text-lg px-4 py-2 bg-black text-white rounded-full hover:bg-gray-800" @click="isOpen = false">Sign Up</a></li>
+      </ul>
+    </div>
   </nav>
 
   <!-- Hero -->
-  <section class="text-center py-20 px-6">
-    <h1 class="text-4xl font-bold text-primary mb-4">Bay State Energy</h1>
-    <p class="text-xl max-w-2xl mx-auto">Serving the rapidly growing microreactor market as a platform-agnostic power cycle innovator.</p>
-    <div class="mt-8 space-x-4">
-      <a href="#technology" class="px-6 py-3 bg-primary text-white rounded-lg hover:bg-blue-700">Our Technology</a>
-      <a href="#contact" class="px-6 py-3 border-2 border-primary text-primary rounded-lg hover:bg-primary hover:text-white">Contact Us</a>
+  <section class="hero-bg text-center min-h-screen flex items-center justify-center py-24 px-6">
+    <div class="max-w-3xl mx-auto" data-aos="fade-up">
+      <h1 class="text-6xl font-bold text-white mb-6">Bay State Energy</h1>
+      <p class="text-xl text-white max-w-xl mx-auto mb-8">Serving the rapidly growing microreactor market with platform-agnostic power cycle innovation.</p>
+      <a href="#technology" class="btn-primary px-6 py-3 bg-white text-blue-800 rounded-full hover:bg-gray-200">Our Technology</a>
     </div>
   </section>
 
   <!-- Technology Section -->
-  <section id="technology" class="py-20 px-6 bg-gray-50">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl font-semibold text-dark mb-6">Our Technology</h2>
-      <img src="assets/ntg-model.png" alt="NTG 3D model" class="w-full mb-6 rounded-lg shadow-lg">
-      <p class="mb-4">Our Nuclear Thermoelectric Generator (NTG) offers a power conversion approach with performance comparable to the state-of-the-art microreactor power cycles, yet without the complexity of rotating machinery.</p>
+  <section id="technology" class="py-20 px-6 bg-white">
+    <div class="max-w-4xl mx-auto" data-aos="fade-right">
+      <h2 class="text-4xl font-semibold text-dark mb-6">Our Technology</h2>
+      <img src="assets/ntg-model.png" alt="NTG 3D model" class="section-img w-full mb-6 rounded-lg shadow-lg" loading="lazy">
+      <p class="text-lg text-gray-600 mb-6">Our Nuclear Thermoelectric Generator (NTG) offers a power conversion approach with performance comparable to the state-of-the-art microreactor power cycles, yet without the complexity of rotating machinery.</p>
       <ul class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <li class="p-4 border rounded-lg hover:shadow">
-          <h3 class="font-semibold mb-2">Silent Operation</h3>
-          <p>No moving parts—ultra-quiet for on-site deployments.</p>
+        <li class="p-6 border rounded-lg hover:shadow-lg transition-shadow" data-aos="fade-up" data-aos-delay="100">
+          <h3 class="font-semibold text-xl mb-2">Silent Operation</h3>
+          <p class="text-gray-600">No moving parts—ultra-quiet for on-site deployments.</p>
         </li>
-        <li class="p-4 border rounded-lg hover:shadow">
-          <h3 class="font-semibold mb-2">Modular & Scalable</h3>
-          <p>Fits 1–2 MWe systems; easily integrated with diverse reactor cores.</p>
+        <li class="p-6 border rounded-lg hover:shadow-lg transition-shadow" data-aos="fade-up" data-aos-delay="200">
+          <h3 class="font-semibold text-xl mb-2">Modular & Scalable</h3>
+          <p class="text-gray-600">Fits 1–2 MWe systems; easily integrated with diverse reactor cores.</p>
         </li>
-        <li class="p-4 border rounded-lg hover:shadow">
-          <h3 class="font-semibold mb-2">Rapid Licensing</h3>
-          <p>Fewer mechanical subsystems accelerate regulatory approval.</p>
+        <li class="p-6 border rounded-lg hover:shadow-lg transition-shadow" data-aos="fade-up" data-aos-delay="300">
+          <h3 class="font-semibold text-xl mb-2">Rapid Licensing</h3>
+          <p class="text-gray-600">Fewer mechanical subsystems accelerate regulatory approval.</p>
         </li>
-        <li class="p-4 border rounded-lg hover:shadow">
-          <h3 class="font-semibold mb-2">Cost Efficient</h3>
-          <p>Competitive capital and operating costs compared to sCO₂ Brayton.</p>
+        <li class="p-6 border rounded-lg hover:shadow-lg transition-shadow" data-aos="fade-up" data-aos-delay="400">
+          <h3 class="font-semibold text-xl mb-2">Cost Efficient</h3>
+          <p class="text-gray-600">Competitive capital and operating costs compared to sCO₂ Brayton.</p>
         </li>
       </ul>
     </div>
   </section>
 
   <!-- Market & Feasibility -->
-  <section id="market" class="py-20 px-6">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl font-semibold text-dark mb-6">Market & Feasibility</h2>
-      <p class="mb-6">The microreactor market is projected to exceed $240 billion by 2050, driven by remote power needs, critical infrastructure resilience, and decarbonization goals.</p>
-      <img src="assets/market-chart.png" alt="Market projection chart" class="w-full mb-6 rounded-lg shadow-lg">
-      <p>Bay State Energy will establish feasibility through DOE partnerships, testbed experiments, and in-depth technoeconomic analysis.</p>
+  <section id="market" class="py-20 px-6 bg-gray-50">
+    <div class="max-w-4xl mx-auto" data-aos="fade-left">
+      <h2 class="text-4xl font-semibold text-dark mb-6">Market & Feasibility</h2>
+      <p class="text-lg text-gray-600 mb-6">The microreactor market is projected to exceed $240 billion by 2050, driven by remote power needs, critical infrastructure resilience, and decarbonization goals.</p>
+      <img src="assets/market-chart.png" alt="Market projection chart" class="section-img w-full mb-6 rounded-lg shadow-lg" loading="lazy">
+      <p class="text-lg text-gray-600">Bay State Energy will establish feasibility through DOE partnerships, testbed experiments, and in-depth technoeconomic analysis.</p>
     </div>
   </section>
 
   <!-- Team & Partners -->
-  <section id="team" class="py-20 px-6 bg-gray-50">
-    <div class="max-w-4xl mx-auto text-center">
-      <h2 class="text-3xl font-semibold text-dark mb-6">Team & Partners</h2>
+  <section id="team" class="py-20 px-6 bg-white">
+    <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
+      <h2 class="text-4xl font-semibold text-dark mb-6">Team & Partners</h2>
       <div class="flex flex-wrap justify-center items-center space-x-8 mb-12">
-        <img src="assets/bu-me-logo.png" alt="BU Mechanical Engineering" class="logo">
-        <img src="assets/argonne-logo.png" alt="Argonne National Laboratory" class="logo">
-        <img src="assets/doe-logo.png" alt="U.S. Department of Energy" class="logo">
-        <img src="assets/dod-logo.png" alt="U.S. Department of Defense" class="logo">
+        <img src="assets/bu-me-logo.png" alt="BU Mechanical Engineering" class="logo" loading="lazy">
+        <img src="assets/argonne-logo.png" alt="Argonne National Laboratory" class="logo" loading="lazy">
+        <img src="assets/doe-logo.png" alt="U.S. Department of Energy" class="logo" loading="lazy">
+        <img src="assets/dod-logo.png" alt="U.S. Department of Defense" class="logo" loading="lazy">
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="p-6 border rounded-lg hover:shadow">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="p-6 border rounded-lg hover:shadow-lg transition-shadow" data-aos="fade-up" data-aos-delay="100">
           <h3 class="font-semibold text-xl mb-2">Alexander Urbanski</h3>
-          <p>CTO & Co-Founder. BA in Physics & CS, Boston University. Lead inventor of the NTG.</p>
+          <p class="text-gray-600">CTO & Co-Founder. BA in Physics & CS, Boston University. Lead inventor of the NTG.</p>
         </div>
-        <div class="p-6 border rounded-lg hover:shadow">
+        <div class="p-6 border rounded-lg hover:shadow-lg transition-shadow" data-aos="fade-up" data-aos-delay="200">
           <h3 class="font-semibold text-xl mb-2">Nahiyan Muhammad</h3>
-          <p>CEO & Co-Founder. MS in Nuclear Engineering, UIC. Expert in reactor analytics and policy.</p>
+          <p class="text-gray-600">Energy Systems Engineer, BS in Mechanical and Computer Engineering, Boston University. Thermodynamics and CAD Design.</p>
+        </div>
+        <div class="p-6 border rounded-lg hover:shadow-lg transition-shadow" data-aos="fade-up" data-aos-delay="300">
+          <h3 class="font-semibold text-xl mb-2">Bakdaulet Turganbek</h3>
+          <p class="text-gray-600">CEO & Co-Founder, BA in Economics, Boston University. Grant Proposals, Business Economics.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Press Releases -->
+  <section id="press" class="py-20 px-6 bg-gray-50">
+    <div class="max-w-4xl mx-auto" data-aos="fade-right">
+      <h2 class="text-4xl font-semibold text-dark mb-6">Press Releases</h2>
+      <div class="space-y-6">
+        <div class="p-6 border rounded-lg hover:shadow-lg transition-shadow" data-aos="fade-up" data-aos-delay="100">
+          <h3 class="font-semibold text-xl mb-2">Department of Energy EnergyTech Competition Finalist 2025</h3>
+          <p class="text-gray-600 mb-2">June 15, 2025</p>
+          <p class="text-gray-600">Bay State Energy recognized as a finalist in the DOE EnergyTech Competition for its innovative NTG technology.</p>
+          <a href="https://www.energy.gov/technologycommercialization/articles/24-student-teams-selected-finalists-doe-energytech-university" class="text-secondary hover:underline mt-2 inline-block">Read More</a>
+        </div>
+        <div class="p-6 border rounded-lg hover:shadow-lg transition-shadow" data-aos="fade-up" data-aos-delay="200">
+          <h3 class="font-semibold text-xl mb-2">Prototypes for Humanities 2024</h3>
+          <p class="text-gray-600 mb-2">December 10, 2024</p>
+          <p class="text-gray-600">Bay State Energy showcased its prototypes at the Prototypes for Humanities event, highlighting sustainable energy solutions.</p>
+          <a href="https://www.prototypesforhumanity.com/project/nuclear-thermoelectric-generator/" class="text-secondary hover:underline mt-2 inline-block">Read More</a>
+        </div>
+        <div class="p-6 border rounded-lg hover:shadow-lg transition-shadow" data-aos="fade-up" data-aos-delay="300">
+          <h3 class="font-semibold text-xl mb-2">Boston University Best Senior Project at Dean's Imagineering Competition</h3>
+          <p class="text-gray-600 mb-2">May 20, 2024</p>
+          <p class="text-gray-600">Bay State Energy’s senior project won top honors at BU’s Dean's Imagineering Competition for its NTG innovation.</p>
+          <a href="#" class="text-secondary hover:underline mt-2 inline-block">Read More</a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="py-20 px-6">
-    <div class="max-w-2xl mx-auto text-center">
-      <h2 class="text-3xl font-semibold text-dark mb-6">Get in Touch</h2>
-      <p class="mb-4">Interested in partnering, investing, or learning more? Drop us a line.</p>
-      <p class="mb-8"><a href="mailto:aurban@bu.edu" class="text-secondary hover:underline">aurban@bu.edu</a> &middot; <a href="mailto:nahiyanm@bu.edu" class="text-secondary hover:underline">nahiyanm@bu.edu</a></p>
+  <section id="contact" class="py-20 px-6 bg-white">
+    <div class="max-w-2xl mx-auto text-center" data-aos="fade-up">
+      <h2 class="text-4xl font-semibold text-dark mb-6">Get in Touch</h2>
+      <p class="text-lg text-gray-600 mb-4">Interested in partnering, investing, or learning more? Drop us a line.</p>
+      <p class="mb-8"><a href="mailto:aurban@bu.edu" class="text-secondary hover:underline">aurban@bu.edu</a></p>
       <div class="flex justify-center space-x-4">
-        <a href="https://github.com/your-repo" class="px-6 py-3 border-2 border-dark rounded-lg hover:bg-dark hover:text-white">GitHub Repo</a>
-        <a href="https://bay-state-energy.com" class="px-6 py-3 bg-dark text-white rounded-lg hover:opacity-90">Visit Domain</a>
+        <a href="https://www.linkedin.com/company/bay-state-energy" class="btn-primary px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800">LinkedIn</a>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="py-6 text-center text-sm text-gray-500">
-    &copy; 2025 Bay State Energy. All rights reserved.
+  <footer class="py-8 bg-gray-50 text-center text-sm text-gray-500">
+    <div class="max-w-4xl mx-auto">
+      <p class="mb-4">© 2025 Bay State Energy. All rights reserved.</p>
+      <div class="flex justify-center space-x-6">
+        <a href="https://twitter.com/baystateenergy" class="hover:text-primary">Twitter</a>
+        <a href="https://linkedin.com/company/baystateenergy" class="hover:text-primary">LinkedIn</a>
+        <a href="https://github.com/your-repo" class="hover:text-primary">GitHub</a>
+      </div>
+    </div>
   </footer>
+
+  <!-- Back to Top Button -->
+  <a href="#" class="back-to-top btn-primary p-3 bg-accent text-white rounded-full hover:bg-purple-600" aria-label="Back to top">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+    </svg>
+  </a>
+
+  <!-- Alpine.js for mobile menu -->
+  <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </body>
 </html>
