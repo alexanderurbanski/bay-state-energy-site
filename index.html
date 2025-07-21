@@ -42,86 +42,41 @@
       box-sizing: border-box;
       scroll-behavior: smooth;
     }
-    .logo {
-      height: 64px !important;
-      width: auto !important;
-      transition: transform 0.3s ease;
-    }
-    .logo:hover {
-      transform: scale(1.05);
-    }
-    .btn-primary {
-      transition: all 0.3s ease;
-    }
-    .btn-primary:hover {
-      transform: translateY(-2px) scale(1.05);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    }
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      transition: transform 0.5s ease-in-out;
-    }
-    nav.hidden {
-      transform: translateY(-100%);
-    }
-    .hero-bg {
-      background: linear-gradient(to left, #011858, #001228);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 20px 0;
-      color: white;
-    }
-    .section-img {
-      transition: transform 0.3s ease;
-    }
-    .section-img:hover {
-      transform: scale(1.02);
-    }
-    [id] {
-      scroll-margin-top: 80px;
-    }
-    .mobile-menu {
-      transform: translateY(-100%);
-      transition: transform 0.3s ease-in-out;
-    }
-    .mobile-menu[x-show="isOpen"] {
-      transform: translateY(0);
-    }
-    .back-to-top {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 100;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    .back-to-top.visible {
-      opacity: 1;
-    }
+    .logo { height: 64px !important; width: auto !important; transition: transform 0.3s ease; }
+    .logo:hover { transform: scale(1.05); }
+    .btn-primary { transition: all 0.3s ease; }
+    .btn-primary:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); }
+    nav { position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); transition: transform 0.5s ease-in-out; }
+    nav.hidden { transform: translateY(-100%); }
+    .hero-bg { background: linear-gradient(to left, #011858, #001228); min-height: 100vh; display: flex; align-items: center; padding: 20px 0; color: white; }
+    .section-img { transition: transform 0.3s ease; }
+    .section-img:hover { transform: scale(1.02); }
+    [id] { scroll-margin-top: 80px; }
+    .mobile-menu { transform: translateY(-100%); transition: transform 0.3s ease-in-out; }
+    .mobile-menu[x-show="isOpen"] { transform: translateY(0); }
+    .back-to-top { position: fixed; bottom: 20px; right: 20px; z-index: 100; opacity: 0; transition: opacity 0.3s ease; }
+    .back-to-top.visible { opacity: 1; }
   </style>
 </head>
-<body class="font-sans bg-white text-dark" x-data="{ isOpen: false, lastScroll: 0, scrollTimeout: null }" x-init="
-    AOS.init({ duration: 1000, once: true });
-    window.addEventListener('scroll', () => {
-      clearTimeout($data.scrollTimeout);
-      $data.scrollTimeout = setTimeout(() => {
-        const currentScroll = window.scrollY;
-        const scrollThreshold = 5;
-        if (currentScroll > $data.lastScroll && currentScroll > scrollThreshold) {
-          $refs.nav.classList.add('hidden');
-        } else {
-          $refs.nav.classList.remove('hidden');
-        }
-        $data.lastScroll = currentScroll;
-        document.querySelector('.back-to-top').classList.toggle('visible', currentScroll > 300);
-      }, 50);
-    });
-  ">
+<body class="font-sans bg-white text-dark"
+      x-data="{ isOpen: false, lastScroll: 0, scrollTimeout: null }"
+      x-init="
+        AOS.init({ duration: 1000, once: true });
+        window.addEventListener('scroll', () => {
+          clearTimeout($data.scrollTimeout);
+          $data.scrollTimeout = setTimeout(() => {
+            const currentScroll = window.scrollY;
+            const scrollThreshold = 5;
+            if (currentScroll > $data.lastScroll && currentScroll > scrollThreshold) {
+              $refs.nav.classList.add('hidden');
+            } else {
+              $refs.nav.classList.remove('hidden');
+            }
+            $data.lastScroll = currentScroll;
+            document.querySelector('.back-to-top').classList.toggle('visible', currentScroll > 300);
+          }, 50);
+        });
+      ">
   <!-- Navigation -->
   <nav x-ref="nav" class="w-full flex items-center justify-between p-3 shadow-custom">
     <div class="flex-shrink-0">
@@ -132,10 +87,11 @@
     <div class="flex-1 flex justify-center space-x-6">
       <ul class="hidden md:flex space-x-6 text-gray-700">
         <li><a href="#technology" class="hover:text-primary transition-colors">Technology</a></li>
-        <li><a href="#market" class="hover:text-primary transition-colors">Market</a></li>
-        <li><a href="#team" class="hover:text-primary transition-colors">Team</a></li>
-        <li><a href="#press" class="hover:text-primary transition-colors">Press</a></li>
-        <li><a href="#contact" class="hover:text-primary transition-colors">Contact</a></li>
+        <li><a href="#market"     class="hover:text-primary transition-colors">Market</a></li>
+        <li><a href="#team"       class="hover:text-primary transition-colors">Team</a></li>
+        <li><a href="#press"      class="hover:text-primary transition-colors">Press</a></li>
+        <li><a href="#contact"    class="hover:text-primary transition-colors">Contact</a></li>
+        <li><a href="careers/index.html" class="hover:text-primary transition-colors">Careers</a></li>
       </ul>
     </div>
     <div class="flex-shrink-0">
@@ -149,12 +105,12 @@
     </div>
     <div x-show="isOpen" class="mobile-menu md:hidden absolute top-14 left-0 w-full bg-white shadow-lg" @click.away="isOpen = false">
       <ul class="flex flex-col space-y-4 p-4 text-dark">
-        <li><a href="#technology" class="hover:text-primary transition-colors text-lg" @click="isOpen = false">Technology</a></li>
-        <li><a href="#market" class="hover:text-primary transition-colors text-lg" @click="isOpen = false">Market</a></li>
-        <li><a href="#team" class="hover:text-primary transition-colors text-lg" @click="isOpen = false">Team</a></li>
-        <li><a href="#press" class="hover:text-primary transition-colors text-lg" @click="isOpen = false">Press</a></li>
-        <li><a href="#contact" class="hover:text-primary transition-colors text-lg" @click="isOpen = false">Contact</a></li>
-        <li><a href="#signup" class="hover:text-primary transition-colors text-lg px-4 py-2 bg-black text-white rounded-full hover:bg-gray-800" @click="isOpen = false">Sign Up</a></li>
+        <li><a href="#technology" class="hover:text-primary text-lg" @click="isOpen=false">Technology</a></li>
+        <li><a href="#market"     class="hover:text-primary text-lg" @click="isOpen=false">Market</a></li>
+        <li><a href="#team"       class="hover:text-primary text-lg" @click="isOpen=false">Team</a></li>
+        <li><a href="#press"      class="hover:text-primary text-lg" @click="isOpen=false">Press</a></li>
+        <li><a href="#contact"    class="hover:text-primary text-lg" @click="isOpen=false">Contact</a></li>
+        <li><a href="./careers/index.html" class="hover:text-primary text-lg" @click="isOpen=false">Careers</a></li>
       </ul>
     </div>
   </nav>
@@ -163,7 +119,7 @@
   <section class="hero-bg text-center min-h-screen flex items-center justify-center py-24 px-6">
     <div class="max-w-3xl mx-auto" data-aos="fade-up">
       <h1 class="text-6xl font-bold text-white mb-6">Bay State Energy</h1>
-      <p class="text-xl text-white max-w-xl mx-auto mb-8">Serving the rapidly growing microreactor market with platform-agnostic power cycle innovation.</p>
+      <p class="text-xl text-white max-w-xl mx-auto mb-8">Serving the rapidly growing microreactor market with platform‑agnostic power cycle innovation.</p>
       <a href="#technology" class="btn-primary px-6 py-3 bg-white text-blue-800 rounded-full hover:bg-gray-200">Our Technology</a>
     </div>
   </section>
@@ -173,15 +129,15 @@
     <div class="max-w-4xl mx-auto" data-aos="fade-right">
       <h2 class="text-4xl font-semibold text-dark mb-6">Our Technology</h2>
       <img src="assets/ntg-model.png" alt="NTG 3D model" class="section-img w-full mb-6 rounded-lg shadow-lg" loading="lazy">
-      <p class="text-lg text-gray-600 mb-6">Our Nuclear Thermoelectric Generator (NTG) offers a power conversion approach with performance comparable to the state-of-the-art microreactor power cycles, yet without the complexity of rotating machinery.</p>
+      <p class="text-lg text-gray-600 mb-6">Our Nuclear Thermoelectric Generator (NTG) offers a power conversion approach with performance comparable to the state‑of‑the‑art microreactor power cycles, yet without the complexity of rotating machinery.</p>
       <ul class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <li class="p-6 border rounded-lg hover:shadow-lg transition-shadow" data-aos="fade-up" data-aos-delay="100">
           <h3 class="font-semibold text-xl mb-2">Silent Operation</h3>
-          <p class="text-gray-600">No moving parts—ultra-quiet for on-site deployments.</p>
+          <p class="text-gray-600">No moving parts—ultra-quiet for on‑site deployments.</p>
         </li>
         <li class="p-6 border rounded-lg hover:shadow-lg transition-shadow" data-aos="fade-up" data-aos-delay="200">
           <h3 class="font-semibold text-xl mb-2">Modular & Scalable</h3>
-          <p class="text-gray-600">Fits 1–2 MWe systems; easily integrated with diverse reactor cores.</p>
+          <p class="text-gray-600">Fits 1–2 MWe systems; easily integrated with diverse reactor cores.</p>
         </li>
         <li class="p-6 border rounded-lg hover:shadow-lg transition-shadow" data-aos="fade-up" data-aos-delay="300">
           <h3 class="font-semibold text-xl mb-2">Rapid Licensing</h3>
@@ -194,126 +150,91 @@
       </ul>
     </div>
   </section>
+
   <!-- Market & Feasibility -->
   <section id="market" class="py-20 px-6 bg-gray-50">
     <div class="max-w-4xl mx-auto" data-aos="fade-left">
       <h2 class="text-4xl font-semibold text-dark mb-6">Exponential Microreactor Growth</h2>
-      <p class="text-lg text-gray-600 mb-6">The microreactor market is projected to exceed $240 billion by 2050, driven by remote power needs, critical infrastructure resilience, and decarbonization goals.</p>
-      <!-- ①  Chart container (put where you want the graph to show up) -->
-        <div id="capacity-chart-wrapper" class="max-w-4xl mx-auto my-12">
-            <canvas id="capacityChart" height="320"></canvas>
-        
-        </div>
-        <!-- ===== DATA SOURCE (place right after </canvas>) ===== -->
-        <div class="mt-4 text-center">
-            <p class="text-sm italic text-gray-500">
-            Source:
-            <a
-                href="https://gain.inl.gov/content/uploads/4/2024/04/Document-INL-EXT-21-63214.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="underline hover:text-blue-600"
-            >
-                INL “Microreactor Market Assessment (INL-EXT-21-63214, Apr 2024)”
-            </a>
-            </p>
-        </div>
-        <!-- ===== END DATA SOURCE ===== -->
-         <p><a> </a></p> 
+      <p class="text-lg text-gray-600 mb-6">The microreactor market is projected to exceed $240 billion by 2050, driven by remote power needs, critical infrastructure resilience, and decarbonization goals.</p>
+      <div id="capacity-chart-wrapper" class="max-w-4xl mx-auto my-12">
+        <canvas id="capacityChart" height="320"></canvas>
+      </div>
+      <div class="mt-4 text-center">
+        <p class="text-sm italic text-gray-500">
+          Source: <a href="https://gain.inl.gov/content/uploads/4/2024/04/Document-INL-EXT-21-63214.pdf" target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-600">
+            INL “Microreactor Market Assessment (INL‑EXT‑21‑63214, Apr 2024)”
+          </a>
+        </p>
+      </div>
     </div>
   </section>
 
+  <!-- Team & Partners -->
   <section id="team" class="py-20 px-6 bg-white">
     <div class="max-w-4xl mx-auto text-center" data-aos="fade-up">
       <h2 class="text-4xl font-semibold text-dark mb-6">Team & Partners</h2>
-  
-      <!-- Partner Logos -->
       <div class="flex flex-wrap justify-center items-center space-x-8 mb-12">
         <img src="assets/bu-me-logo.png" alt="BU Mechanical Engineering" class="logo" loading="lazy">
         <img src="assets/argonne-logo.PNG" alt="Argonne National Laboratory" class="logo" loading="lazy">
         <img src="assets/doe-logo.png" alt="U.S. Department of Energy" class="logo" loading="lazy">
         <img src="assets/dod-logo.png" alt="U.S. Department of Defense" class="logo" loading="lazy">
       </div>
-  
-      <!-- Team Member Cards -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        
         <!-- Alexander Urbanski -->
         <div class="p-6 border rounded-lg hover:shadow-lg transition-shadow" data-aos="fade-up" data-aos-delay="100">
           <h3 class="font-semibold text-xl mb-2">Alexander Urbanski</h3>
-          <p class="text-gray-600">
-            CTO &amp; Co-Founder. PhD Mechanical Engineering Candidate, UIC &amp BA Physics, Boston University. Former Argonne National Laboratory.
-          </p>
-          <a
-            href="https://www.linkedin.com/in/aurban42/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-block mt-4"
-          >
+          <p class="text-gray-600">CTO &amp; Co-Founder. PhD Mechanical Engineering Candidate, UIC &amp; BA Physics, Boston University. Former Argonne National Laboratory.</p>
+          <a href="https://www.linkedin.com/in/aurban42/" target="_blank" rel="noopener noreferrer" class="inline-block mt-4">
             <img src="assets/linkedin-icon.svg" alt="LinkedIn" class="w-6 h-6" />
           </a>
         </div>
-  
         <!-- Nahiyan Muhammad -->
         <div class="p-6 border rounded-lg hover:shadow-lg transition-shadow" data-aos="fade-up" data-aos-delay="200">
           <h3 class="font-semibold text-xl mb-2">Nahiyan Muhammad</h3>
-          <p class="text-gray-600">
-            Energy Systems Engineer. BS in Mechanical and Computer Engineering, Boston University. Former Harmony Desalinating Engineer and Boston University Researcher / Lab Advisor.
-          </p>
-          <a
-            href="https://www.linkedin.com/in/nahiyan-muhammad/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-block mt-4"
-          >
+          <p class="text-gray-600">Energy Systems Engineer. BS in Mechanical and Computer Engineering, Boston University. Former Harmony Desalinating Engineer and BU Researcher.</p>
+          <a href="https://www.linkedin.com/in/nahiyan-muhammad/" target="_blank" rel="noopener noreferrer" class="inline-block mt-4">
             <img src="assets/linkedin-icon.svg" alt="LinkedIn" class="w-6 h-6" />
           </a>
         </div>
-  
         <!-- Bakdaulet Turganbek -->
         <div class="p-6 border rounded-lg hover:shadow-lg transition-shadow" data-aos="fade-up" data-aos-delay="300">
           <h3 class="font-semibold text-xl mb-2">Bakdaulet Turganbek</h3>
-          <p class="text-gray-600">
-            Co-Founder. BA in Economics, Boston University. Former Chief Investment Officer.
-          </p>
-          <a
-            href="https://www.linkedin.com/in/bakdaulet-t-08506632a/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-block mt-4"
-          >
+          <p class="text-gray-600">Co-Founder. BA in Economics, Boston University. Former Chief Investment Officer.</p>
+          <a href="https://www.linkedin.com/in/bakdaulet-t-08506632a/" target="_blank" rel="noopener noreferrer" class="inline-block mt-4">
             <img src="assets/linkedin-icon.svg" alt="LinkedIn" class="w-6 h-6" />
           </a>
         </div>
-  
       </div>
     </div>
   </section>
-  
 
   <!-- Press Releases -->
   <section id="press" class="py-20 px-6 bg-gray-50">
     <div class="max-w-4xl mx-auto" data-aos="fade-right">
       <h2 class="text-4xl font-semibold text-dark mb-6">Press Releases</h2>
       <div class="space-y-6">
+        <!-- DOE $20k award -->
         <div class="p-6 border rounded-lg hover:shadow-lg transition-shadow" data-aos="fade-up" data-aos-delay="100">
-          <h3 class="font-semibold text-xl mb-2">U.S. Department of Energy Awards $20,000 for Microreactor R&ampD</h3>
+          <h3 class="font-semibold text-xl mb-2">U.S. Department of Energy Awards $20,000 for Microreactor R&amp;D</h3>
           <p class="text-gray-600 mb-2">June 24, 2025</p>
-          <p class="text-gray-600">Bay State Energy wins a $20,000 bonus prize at the EnergyTech UP finals at the Colorado School of Mines, representing Boston University and beating out top teams from MIT, Harvard, and Stanford.</p>
+          <p class="text-gray-600">Bay State Energy wins a $20,000 bonus prize at the EnergyTech UP finals at the Colorado School of Mines, representing BU and beating out top teams from MIT, Harvard, and Stanford.</p>
           <a href="https://www.energy.gov/technologycommercialization/articles/energytech-university-prize-2025-student-winners-announced" class="text-secondary hover:underline mt-2 inline-block">Read More</a>
         </div>
+        <!-- DOE Finalist -->
         <div class="p-6 border rounded-lg hover:shadow-lg transition-shadow" data-aos="fade-up" data-aos-delay="100">
           <h3 class="font-semibold text-xl mb-2">U.S. Department of Energy EnergyTech Competition Finalist 2025</h3>
           <p class="text-gray-600 mb-2">June 15, 2025</p>
           <p class="text-gray-600">Bay State Energy recognized as a finalist in the DOE EnergyTech Competition for its innovative NTG technology.</p>
           <a href="https://www.energy.gov/technologycommercialization/articles/24-student-teams-selected-finalists-doe-energytech-university" class="text-secondary hover:underline mt-2 inline-block">Read More</a>
         </div>
+        <!-- Prototypes for Humanity -->
         <div class="p-6 border rounded-lg hover:shadow-lg transition-shadow" data-aos="fade-up" data-aos-delay="200">
           <h3 class="font-semibold text-xl mb-2">Prototypes for Humanities 2024</h3>
           <p class="text-gray-600 mb-2">December 10, 2024</p>
           <p class="text-gray-600">Bay State Energy showcased its prototypes at the Prototypes for Humanities event, highlighting sustainable energy solutions.</p>
           <a href="https://www.prototypesforhumanity.com/project/nuclear-thermoelectric-generator/" class="text-secondary hover:underline mt-2 inline-block">Read More</a>
         </div>
+        <!-- BU Dean's Imagineering -->
         <div class="p-6 border rounded-lg hover:shadow-lg transition-shadow" data-aos="fade-up" data-aos-delay="300">
           <h3 class="font-semibold text-xl mb-2">Boston University Best Senior Project at Dean's Imagineering Competition</h3>
           <p class="text-gray-600 mb-2">May 20, 2024</p>
@@ -329,9 +250,10 @@
     <div class="max-w-2xl mx-auto text-center" data-aos="fade-up">
       <h2 class="text-4xl font-semibold text-dark mb-6">Get in Touch</h2>
       <p class="text-lg text-gray-600 mb-4">Interested in partnering, investing, or learning more? Drop us a line.</p>
-      <p class="mb-8"><a href="mailto:aurban@bu.edu" class="text-secondary hover:underline">aurban@bu.edu</a></p>
+      <p class="mb-8"><a href="mailto:aurban@bu.edu" class="text-secondary hover:underline">aurban21@uic.edu</a></p>
       <div class="flex justify-center space-x-4">
         <a href="https://www.linkedin.com/company/bay-state-energy" class="btn-primary px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800">LinkedIn</a>
+        <a href="https://alexanderurbanski.github.io/bay-state-energy-site/careers/" class="btn-primary px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800">Careers</a>
       </div>
     </div>
   </section>
@@ -357,81 +279,40 @@
 
   <!-- Alpine.js for mobile menu -->
   <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  <!-- ②  Chart.js CDN + configuration (place right above </body>) -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-<script>
-  // Data
-  const capacityData = {
-    labels: ['2030', '2040', '2050'],
-    datasets: [
-      {
-        label: 'Microreactors (IAEA Low Case)',
-        data: [0, 5, 25],
-        backgroundColor: '#2563EB',      // Tailwind primary
-        stack: 'total',
-      },
-      {
-        label: 'Microreactors (IAEA High Case)',
-        data: [1, 12, 10],
-        backgroundColor: '#94A3B8',      // Tailwind accent
-        stack: 'total',
-      },
-      {
-        label: 'Microreactors (IPCC Modified)',
-        data: [4, 4, 80],
-        backgroundColor: '#0F172A',      // Tailwind secondary
-        stack: 'total',
-      },
-    ],
-  };
-
-  // Chart configuration
-  const capacityConfig = {
-    type: 'bar',
-    data: capacityData,
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        title: {
-          display: true,
-          text: 'Microreactor Top-Down Global Projection (Capacity)',
-          font: { family: 'Lexend', size: 18 },
-          color: '#0F172A',              // Tailwind dark
-          padding: { bottom: 10 },
-        },
-        legend: {
-          position: 'bottom',
-          labels: { font: { family: 'Lexend' }, color: '#0F172A' },
-        },
-        tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y} GWe` } },
-      },
-      scales: {
-        x: {
-          stacked: true,
-          grid: { display: false },
-          ticks: { color: '#0F172A', font: { family: 'Lexend' } },
-        },
-        y: {
-          stacked: true,
-          suggestedMin: 0,
-          suggestedMax: 140,
-          title: {
-            display: true,
-            text: 'GWe',
-            font: { family: 'Lexend' },
-            color: '#0F172A',
+  <!-- Chart.js CDN + config -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script>
+    const capacityData = {
+      labels: ['2030','2040','2050'],
+      datasets: [
+        { label:'Microreactors (IAEA Low Case)',  data:[0,5,25],   backgroundColor:'#2563EB', stack:'total' },
+        { label:'Microreactors (IAEA High Case)', data:[1,12,10],  backgroundColor:'#94A3B8', stack:'total' },
+        { label:'Microreactors (IPCC Modified)',  data:[4,4,80],   backgroundColor:'#0F172A', stack:'total' },
+      ]
+    };
+    const capacityConfig = {
+      type:'bar', data:capacityData,
+      options:{
+        responsive:true, maintainAspectRatio:false,
+        plugins:{
+          title:{
+            display:true, text:'Microreactor Top-Down Global Projection (Capacity)',
+            font:{ family:'Lexend', size:18 }, color:'#0F172A', padding:{ bottom:10 }
           },
-          ticks: { color: '#0F172A', font: { family: 'Lexend' } },
+          legend:{ position:'bottom', labels:{ font:{ family:'Lexend' }, color:'#0F172A' } },
+          tooltip:{ callbacks:{ label:ctx=>`${ctx.dataset.label}: ${ctx.parsed.y} GWe` }}
         },
-      },
-    },
-  };
-
-  // Render the chart
-  const ctx = document.getElementById('capacityChart');
-  new Chart(ctx, capacityConfig);
-</script>
-
+        scales:{
+          x:{ stacked:true, grid:{ display:false }, ticks:{ color:'#0F172A', font:{ family:'Lexend' } } },
+          y:{
+            stacked:true, suggestedMin:0, suggestedMax:140,
+            title:{ display:true, text:'GWe', font:{ family:'Lexend' }, color:'#0F172A' },
+            ticks:{ color:'#0F172A', font:{ family:'Lexend' } }
+          }
+        }
+      }
+    };
+    new Chart(document.getElementById('capacityChart'), capacityConfig);
+  </script>
 </body>
 </html>
