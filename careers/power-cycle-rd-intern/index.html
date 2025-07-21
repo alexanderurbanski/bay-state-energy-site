@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Research Engineer Intern | Bay State Energy</title>
+  <meta name="description" content="Internship at Bay State Energy in power cycle R&D and thermoelectric innovation.">
+  <meta name="keywords" content="Bay State Energy, job, internship, thermoelectric, microreactor">
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily:{ sans:['Lexend','sans-serif'] },
+          colors:{
+            primary:'#1E40AF', secondary:'#047857',
+            dark:'#111827', accent:'#7C3AED',
+          },
+          boxShadow:{ custom:'0 1px 3px rgba(0,0,0,0.1)' },
+        }
+      }
+    }
+  </script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth;}
+    .logo{height:64px!important;width:auto!important;transition:transform .3s;}
+    .logo:hover{transform:scale(1.05);}
+    .btn-primary{transition:all .3s ease;}
+    .btn-primary:hover{transform:translateY(-2px) scale(1.05);box-shadow:0 4px 12px rgba(0,0,0,0.15);}
+    nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);transition:transform .5s ease-in-out;}
+    nav.hidden{transform:translateY(-100%);}
+    [id]{scroll-margin-top:80px;}
+    .mobile-menu{transform:translateY(-100%);transition:transform .3s ease-in-out;}
+    .mobile-menu[x-show="isOpen"]{transform:translateY(0);}
+    .back-to-top{position:fixed;bottom:20px;right:20px;z-index:100;opacity:0;transition:opacity .3s ease;}
+    .back-to-top.visible{opacity:1;}
+  </style>
+</head>
+<body class="font-sans bg-white text-dark"
+      x-data="{ isOpen:false, lastScroll:0, scrollTimeout:null }"
+      x-init="
+        AOS.init({ duration:1000, once:true });
+        window.addEventListener('scroll',()=>{
+          clearTimeout($data.scrollTimeout);
+          $data.scrollTimeout=setTimeout(()=>{
+            const cs=window.scrollY, th=5;
+            if(cs>$data.lastScroll && cs>th) $refs.nav.classList.add('hidden');
+            else $refs.nav.classList.remove('hidden');
+            $data.lastScroll=cs;
+            document.querySelector('.back-to-top').classList.toggle('visible', cs>300);
+          },50);
+        });
+      ">
+  <!-- Navigation -->
+  <nav x-ref="nav" class="w-full flex items-center justify-between p-3 shadow-custom">
+    <div class="flex-shrink-0">
+      <a href="../../index.html">
+        <img src="../../assets/logo-black-test-allcaps.png" alt="Bay State Energy logo" class="logo">
+      </a>
+    </div>
+    <div class="flex-1 flex justify-center space-x-6">
+      <ul class="hidden md:flex space-x-6 text-gray-700">
+        <li><a href="../../index.html#technology" class="hover:text-primary transition-colors">Technology</a></li>
+        <li><a href="../../index.html#market"     class="hover:text-primary transition-colors">Market</a></li>
+        <li><a href="../../index.html#team"       class="hover:text-primary transition-colors">Team</a></li>
+        <li><a href="../../index.html#press"      class="hover:text-primary transition-colors">Press</a></li>
+        <li><a href="../../index.html#contact"    class="hover:text-primary transition-colors">Contact</a></li>
+        <li><a href="../index.html"               class="hover:text-primary transition-colors">Careers</a></li>
+      </ul>
+    </div>
+    <div class="flex-shrink-0">
+      <a href="../../index.html#contactus" class="px-4 py-2 bg-black text-white rounded-full hover:bg-gray-800 transition-colors">Contact Us</a>
+      <button @click="isOpen=!isOpen" class="md:hidden ml-4 text-dark focus:outline-none" aria-label="Toggle mobile">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path :stroke="isOpen?'none':'currentColor'" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          <path :stroke="isOpen?'currentColor':'none'" stroke-width="2" d="M6 6l12 12M6 18l12 -12"/>
+        </svg>
+      </button>
+    </div>
+    <div x-show="isOpen" class="mobile-menu md:hidden absolute top-14 left-0 w-full bg-white shadow-lg" @click.away="isOpen=false">
+      <ul class="flex flex-col space-y-4 p-4 text-dark">
+        <li><a href="../../index.html#technology" class="hover:text-primary text-lg" @click="isOpen=false">Technology</a></li>
+        <li><a href="../../index.html#market"     class="hover:text-primary text-lg" @click="isOpen=false">Market</a></li>
+        <li><a href="../../index.html#team"       class="hover:text-primary text-lg" @click="isOpen=false">Team</a></li>
+        <li><a href="../../index.html#press"      class="hover:text-primary text-lg" @click="isOpen=false">Press</a></li>
+        <li><a href="../../index.html#contact"    class="hover:text-primary text-lg" @click="isOpen=false">Contact</a></li>
+        <li><a href="../index.html"               class="hover:text-primary text-lg" @click="isOpen=false">Careers</a></li>
+        <li><a href="../../index.html#signup"     class="hover:text-primary text-lg px-4 py-2 bg-black text-white rounded-full hover:bg-gray-800" @click="isOpen=false">Sign Up</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Job Description -->
+  <section id="job" class="py-20 px-6 bg-white">
+    <div class="max-w-4xl mx-auto" data-aos="fade-up">
+      <h1 class="text-5xl font-bold text-dark mb-6">Research Engineer Intern</h1>
+      <p class="text-lg text-gray-600 mb-8">
+        Bay State Energy is the first company to serve the rapidly growing microreactor market as a platform‑agnostic innovator in power cycle technology.
+        Our patent‑pending power cycle design aims to completely replace the turbine and its subsystems for 1–2 MWe microreactors with
+        high‑performing thermoelectric generators (TEGs), slashing mechanical complexity, cost, weight, and licensing timelines,
+        while improving safety and net efficiency.
+      </p>
+
+      <h2 class="text-2xl font-semibold text-dark mb-4">Responsibilities</h2>
+      <ul class="list-disc list-inside text-gray-600 mb-6">
+        <li>Model heat transfer, power conversion, and thermoelectric physics in Python, MOOSE, OpenFOAM, ANSYS, or similar tools.</li>
+        <li>Design and instrument a 1 kWe bench‑scale TEG chamber inside a closed‑circuit helium loop (700 – 900 K).</li>
+        <li>Prototype and test: specify heaters, sensors (temperature distribution, heat flux, material performance), centrifugal pump hardware; execute experiments and analyze data.</li>
+        <li>Collaborate with founders and DOE‑connected advisors to iterate on TEG chamber designs.</li>
+        <li>Travel may be required (2–3 trips) to lab/partner sites; expenses covered.</li>
+      </ul>
+
+      <h2 class="text-2xl font-semibold text-dark mb-4">Preferred Skills</h2>
+      <ul class="list-disc list-inside text-gray-600 mb-6">
+        <li>Experience constructing or simulating TEGs or other thermoelectric systems.</li>
+        <li>Coursework or experience in thermal‑fluids, heat transfer, material performance, or FEA/CFD simulation.</li>
+        <li>Familiarity with nuclear energy systems.</li>
+        <li>Solid coding ability and data‑analysis savvy.</li>
+        <li>Advanced CAD projects or coursework.</li>
+        <li>Experience with laboratory safety protocols for high‑temperature equipment.</li>
+      </ul>
+
+      <h2 class="text-2xl font-semibold text-dark mb-4">Logistics</h2>
+      <ul class="list-disc list-inside text-gray-600 mb-6">
+        <li><strong>Term:</strong> September – December 2025 (flexible around finals).</li>
+        <li><strong>Hours:</strong> 15 – 25 per week (accommodated around coursework).</li>
+        <li><strong>Compensation:</strong> $18 – $30 per hour.</li>
+        <li><strong>Location:</strong> Hybrid (Boston, MA or Chicago, IL); fully remote considered.</li>
+      </ul>
+
+      <h2 class="text-2xl font-semibold text-dark mb-4">Why Bay State Energy?</h2>
+      <ul class="list-disc list-inside text-gray-600 mb-6">
+        <li>IP appraised in the $9.8 M – $46.8 M range, backed by our DOE EnergyTech UP win.</li>
+        <li>Mentorship from founders, national lab researchers, and industry veterans.</li>
+        <li>Flexible hours and opportunities to publish or present your work.</li>
+        <li>Shape a first‑of‑its‑kind power cycle platform for a market projected to exceed 12 000 deployments by 2050 (> $250 B) per INL.</li>
+        <li>Advance clean nuclear energy to address climate change, fuel finiteness, and growing energy demands.</li>
+        <li>Potential path to full‑time with a generous equity package.</li>
+      </ul>
+
+      <p class="mt-8 italic text-gray-600">Applications reviewed on a rolling basis until <strong>August 15, 2025</strong>.</p>
+      <p class="mt-8 italic text-gray-600">To apply, please email your resume to [aurban21@uic.edu]. To boost your application, include a few sentences about the most challenging R&ampD project you've worked on.</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8 bg-gray-50 text-center text-sm text-gray-500">
+    <div class="max-w-4xl mx-auto">
+      <p class="mb-4">© 2025 Bay State Energy. All rights reserved.</p>
+      <div class="flex justify-center space-x-6">
+        <a href="https://twitter.com/baystateenergy" class="hover:text-primary">Twitter</a>
+        <a href="https://linkedin.com/company/baystateenergy" class="hover:text-primary">LinkedIn</a>
+        <a href="https://github.com/your-repo" class="hover:text-primary">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <a href="#" class="back-to-top btn-primary p-3 bg-accent text-white rounded-full hover:bg-purple-600" aria-label="Back to top">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+    </svg>
+  </a>
+
+  <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</body>
+</html>
